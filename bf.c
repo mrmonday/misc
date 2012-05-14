@@ -20,12 +20,30 @@ char array[30000];
 char *p = array;
 
 char *bf;
+char *bfStart;
 size_t bfLength;
 
-// TODO Line/character numbers
+void get_location(size_t *line, size_t *character)
+{
+    *line = 1;
+    char *cursor = bfStart;
+    char *last_line = cursor;
+    for (; cursor < bf; cursor++)
+    {
+        if (*cursor == '\n')
+        {
+            (*line)++;
+            last_line = cursor + 1;
+        }
+    }
+    *character = bf - last_line;
+}
+
 void error(const char *msg)
 {
-    fprintf(stderr, "error: %s\n", msg);
+    size_t line, character;
+    get_location(&line, &character);
+    fprintf(stderr, "error(%zu, %zu): %s\n", line, character, msg);
 }
 
 int act(char c)
@@ -120,6 +138,7 @@ int read_file(const char *f)
     }
     fclose(file);
     bf[bfLength] = '\0';
+    bfStart = bf;
     return 0;
 }
 
@@ -132,7 +151,7 @@ int main(int argc, const char *argv[])
     }
     if (read_file(argv[1]))
         return 1;
-    for (int i = 0; i < bfLength; i++)
+    for (size_t i = 0; i < bfLength; i++)
     {
         if (act(*bf++))
             return 1;
