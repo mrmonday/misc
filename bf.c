@@ -22,15 +22,6 @@ char *p = array;
 char *bf;
 size_t bfLength;
 
-void check(void* ptr)
-{
-    if (ptr == NULL)
-    {
-        fprintf(stderr, "Memory error\n");
-        assert(0);
-    }
-}
-
 // TODO Line/character numbers
 void error(char *msg)
 {
@@ -110,7 +101,11 @@ int read_file(const char *f)
     fseek(file, 0, SEEK_END);
     bfLength = ftell(file);
     bf = malloc(bfLength);
-    check(bf);
+    if (bf == NULL)
+    {
+        fprintf(stderr, "Memory error\n");
+        return 1;
+    }
     rewind(file);
 
     if (fread(bf, 1, bfLength, file) != bfLength)
