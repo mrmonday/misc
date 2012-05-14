@@ -92,14 +92,10 @@ void act(char c)
     }
 }
 
-int main(int argc, const char *argv[])
+// Returns != 0 on failure
+int read_file(const char *f)
 {
-    if (argc != 2)
-    {
-        fprintf(stderr, "Usage: %s <file>\n", argv[0]);
-        return 1;
-    }
-    FILE *file = fopen(argv[1], "r");
+    FILE *file = fopen(f, "r");
     if (file == NULL)
     {
         perror("Unable to open file");
@@ -117,7 +113,18 @@ int main(int argc, const char *argv[])
         return 1;
     }
     fclose(file);
+    return 0;
+}
 
+int main(int argc, const char *argv[])
+{
+    if (argc != 2)
+    {
+        fprintf(stderr, "Usage: %s <file>\n", argv[0]);
+        return 1;
+    }
+    if (read_file(argv[1]))
+        return 1;
     for (int i = 0; i < bfLength; i++)
     {
         act(*bf++);
