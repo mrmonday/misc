@@ -24,7 +24,7 @@ char *bf;
 char *bf_start;
 size_t bf_length;
 
-void get_location(size_t *line, size_t *character)
+static void get_location(size_t *line, size_t *character)
 {
     *line = 1;
     char *cursor = bf_start;
@@ -40,7 +40,7 @@ void get_location(size_t *line, size_t *character)
     *character = bf - last_line;
 }
 
-void error_aux(const char *msg, const char *aux)
+static void error_aux(const char *msg, const char *aux)
 {
     size_t line, character;
     get_location(&line, &character);
@@ -51,12 +51,12 @@ void error_aux(const char *msg, const char *aux)
     }
 }
 
-void error(const char *msg)
+static void error(const char *msg)
 {
     error_aux(msg, NULL);
 }
 
-int act(char c)
+static int act(char c)
 {
     int open = 0;
     char newc;
@@ -125,7 +125,7 @@ int act(char c)
 }
 
 // Returns != 0 on failure
-int read_file(const char *f)
+static int read_file(const char *f)
 {
     FILE *file = fopen(f, "r");
     if (file == NULL)
@@ -154,7 +154,7 @@ int read_file(const char *f)
     return 0;
 }
 
-int show_help(const char *program_name)
+static int show_help(const char *program_name)
 {
     fprintf(stderr, "Usage: %s [options] <file>\n", program_name);
     fprintf(stderr, "Options:\n");
@@ -163,7 +163,7 @@ int show_help(const char *program_name)
     return 1;
 }
 
-int alloc_memory(void)
+static int alloc_memory(void)
 {
     array = malloc(array_length);
     if (array == NULL)
