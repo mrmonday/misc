@@ -16,13 +16,13 @@
 #include <string.h>
 #include <stdlib.h>
 
-char *array;
-int array_length = 30000;
-char *p;
+static char *array;
+static int array_length = 30000;
+static char *p;
 
-char *bf;
-char *bf_start;
-size_t bf_length;
+static char *bf;
+static char *bf_start;
+static size_t bf_length;
 
 static void get_location(size_t *line, size_t *character)
 {
