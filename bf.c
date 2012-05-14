@@ -23,9 +23,9 @@ char *bf;
 size_t bfLength;
 
 // TODO Line/character numbers
-void error(char *msg)
+void error(const char *msg)
 {
-    fprintf(stderr, "%s\n", msg);
+    fprintf(stderr, "error: %s\n", msg);
 }
 
 int act(char c)
@@ -69,6 +69,11 @@ int act(char c)
         case '[':
             while ((newc = *end++) != ']' || open)
             {
+                if (newc == '\0')
+                {
+                    error("unmatched [");
+                    return 1;
+                }
                 if (newc == '[') open++;
                 if (newc == ']') open--;
             }
@@ -100,7 +105,7 @@ int read_file(const char *f)
     }
     fseek(file, 0, SEEK_END);
     bfLength = ftell(file);
-    bf = malloc(bfLength);
+    bf = malloc(bfLength + 1);
     if (bf == NULL)
     {
         fprintf(stderr, "Memory error\n");
@@ -114,6 +119,7 @@ int read_file(const char *f)
         return 1;
     }
     fclose(file);
+    bf[bfLength] = '\0';
     return 0;
 }
 
