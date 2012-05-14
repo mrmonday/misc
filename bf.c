@@ -35,11 +35,9 @@ void check(void* ptr)
 void error(char *msg)
 {
     fprintf(stderr, "%s\n", msg);
-    // TODO Fail gracefully
-    exit(1);
 }
 
-void act(char c)
+int act(char c)
 {
     int open = 0;
     char newc;
@@ -51,12 +49,18 @@ void act(char c)
     {
         case '>':
             if (p + 1 >= array + 30000)
+            {
                 error("overflow at char >");
+                return 1;
+            }
             ++p;
             break;
         case '<':
             if (p - 1 < array)
+            {
                 error("underflow at char <");
+                return 1;
+            }
             --p;
             break;
         case '+':
@@ -81,7 +85,8 @@ void act(char c)
             {
                 while (bf < end)
                 {
-                    act(*bf++);
+                    if (act(*bf++))
+                        return 1;
                 }
                 bf = start;
             }
@@ -90,6 +95,7 @@ void act(char c)
         default:
             break;
     }
+    return 0;
 }
 
 // Returns != 0 on failure
@@ -127,7 +133,8 @@ int main(int argc, const char *argv[])
         return 1;
     for (int i = 0; i < bfLength; i++)
     {
-        act(*bf++);
+        if (act(*bf++))
+            return 1;
     }
     return 0;
 }
