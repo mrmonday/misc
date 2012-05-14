@@ -50,13 +50,13 @@ void act(char c)
     switch(c)
     {
         case '>':
-            if (p + 1 < array || p + 1 > array + 30000)
-                error("overflow or underflow at char >");
+            if (p + 1 >= array + 30000)
+                error("overflow at char >");
             ++p;
             break;
         case '<':
-            if (p - 1 < array || p - 1 > array + 30000)
-                error("overflow or underflow at char <");
+            if (p - 1 < array)
+                error("underflow at char <");
             --p;
             break;
         case '+':
