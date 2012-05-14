@@ -26,9 +26,17 @@ void check(void* ptr)
 {
     if (ptr == NULL)
     {
-        fprintf(stderr, "Memory error");
+        fprintf(stderr, "Memory error\n");
         assert(0);
     }
+}
+
+// TODO Line/character numbers
+void error(char *msg)
+{
+    fprintf(stderr, "%s\n", msg);
+    // TODO Fail gracefully
+    exit(1);
 }
 
 void act(char c)
@@ -42,9 +50,13 @@ void act(char c)
     switch(c)
     {
         case '>':
+            if (p + 1 < array || p + 1 > array + 30000)
+                error("overflow or underflow at char >");
             ++p;
             break;
         case '<':
+            if (p - 1 < array || p - 1 > array + 30000)
+                error("overflow or underflow at char <");
             --p;
             break;
         case '+':
