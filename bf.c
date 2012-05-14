@@ -69,7 +69,7 @@ int act(char c)
         case '>':
             if (p + 1 >= array + array_length)
             {
-                char *try;
+                char try[128];
                 sprintf(try, "try using --memory with a value greater than %d", array_length);
                 error_aux("overflow at char >", try);
                 return 1;
