@@ -2,7 +2,7 @@
  * A rather stupid brainfuck interpreter
  * Seems to work for all programs I've tested.
  *
- * Copyright (C) Robert Clipsham <robert@octarineparrot.com>
+ * Copyright (C) 2012, Robert Clipsham <robert@octarineparrot.com>
  *
  * This program is free software. It comes without any warranty, to
  * the extent permitted by applicable law. You can redistribute it

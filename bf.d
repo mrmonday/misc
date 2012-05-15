@@ -3,7 +3,7 @@
  * I actually prefer the C version, this is a complete hack
  * and not remotely D-ish.
  *
- * Copyright (C) Robert Clipsham <robert@octarineparrot.com>
+ * Copyright (C) 2012, Robert Clipsham <robert@octarineparrot.com>
  *
  * This program is free software. It comes without any warranty, to
  * the extent permitted by applicable law. You can redistribute it
