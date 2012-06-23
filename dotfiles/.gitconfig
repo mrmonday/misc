@@ -1,0 +1,12 @@
+[core]
+    editor = git diff --cached > $GIT_DIR/tmpdiff && vim $GIT_DIR/tmpdiff '+set buftype=help filetype=diff' "+vsplit $1" '+set tw=79' '+vertical res 80' '+next' && true
+[user]
+	name = Robert Clipsham
+	email = robert@octarineparrot.com
+[alias]
+    ci = commit
+    co = checkout
+    st = status
+    glog = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%cD%C(reset) %C(bold green)(%cr)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(bold white)â %cn%C(reset)' --abbrev-commit
+[color]
+        ui = true
