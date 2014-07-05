@@ -57,7 +57,7 @@ $VBOXMANAGE setproperty vrdeextpack VNC &&
 $VBOXMANAGE modifyvm "$VMNAME" --vrdeauthlibrary null --vrdeproperty "VNCPassword=$VNCPASS" &&
 echo Virtual machine created &&
 echo "To unmount the ISO after installation, use: " &&
-echo $VBOXMANAGE storageattach "\"$VMNAME\"" --storagectl "IDE Controller" --port 0 --device 1 --medium emptydrive &&
+echo $VBOXMANAGE storageattach "\"$VMNAME\"" --storagectl "\"IDE Controller\"" --port 0 --device 1 --medium emptydrive &&
 echo "To set up port forwarding for the VM, to allow access to servers (SSH/RDP/HTTP etc) use:" &&
 echo $VBOXMANAGE modifyvm "\"$VMNAME\"" --natpf1 "\"<Rule name>,<tcp|udp>,,<host port>,,<vm port>\"" &&
 echo To start the VM, run: &&
